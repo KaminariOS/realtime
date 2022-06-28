@@ -1,0 +1,41 @@
+[package]
+name = "realtime"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+web=["wgpu/webgl"]
+
+[dependencies]
+cfg-if = "1.0.0"
+egui = { git = "https://github.com/geolehmann/egui" }
+egui-winit = { git = "https://github.com/geolehmann/egui", features = ["links"], default-features = false}
+egui-wgpu = {git = "https://github.com/geolehmann/egui", features = ["winit"]}
+
+env_logger = "0.9.0"
+log = "0.4.17"
+pollster = "0.2.5"
+wgpu = { git = "https://github.com/gfx-rs/wgpu"}
+#wgpu = { version = "0.12"}
+nalgebra = "0.31"
+winit = "0.26.1"
+instant = "0.1.12"
+winit_input_helper = "0.12.0"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+console_error_panic_hook = "0.1.7"
+wasm-bindgen = "0.2.80"
+wasm-bindgen-futures = "0.4.30"
+web-sys = { version = "0.3.57", features = [
+    "Document",
+    "Window",
+    "Element",
+    "Location",
+]}
+# Should use the same version as that in pixels's dependency tree
+console_log = "0.2"
+instant = { version = "0.1.12", features = ["stdweb", "wasm-bindgen"] }
+reqwest = {version = "0.11.10"}
